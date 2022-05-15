@@ -11,8 +11,7 @@ module.exports = {
     },
     compress: true,
     port: 2500,
-    hot: true,
-    
+    hot: true,    
     magicHtml: true,
     open: {                 // open: true,
       target: path.entryPageHTML,
