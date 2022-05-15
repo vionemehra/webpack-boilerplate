@@ -4,7 +4,7 @@
   "description": "Static Pages of SquareYards AE with EJS, SCSS and Javascript",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --config ./config/config.dev.js",
+    "dev": "webpack serve --config ./config/config.dev.js",
     "build": "webpack --config ./config/config.prod.js",
     "clean": "rm -rf build"
   },
