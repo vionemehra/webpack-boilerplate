@@ -32,9 +32,6 @@ module.exports = {
             loader: 'sass-loader',
             options: {
               implementation: require.resolve('sass'),
-              sassOptions: {
-                fiber: false,
-              },
             },
           }
         ],

@@ -1,10 +1,7 @@
-@use 'variables';
+@use 'foundations/variables' as ae;
 @use 'foundations/code';
-@use 'foundations/lists';
 
-body {
-  color: variables.$body-color;
-}
+
 p {
-  color: variables.$color;
+  color: ae.$color;
 }
