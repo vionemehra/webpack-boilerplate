@@ -1,7 +1,7 @@
 const path = require('path');
 
-const name = 'home';
 
+const name = 'home';
 const PATHS = {  
   entryName: name,
   entryPageName: `${name}.html`,
