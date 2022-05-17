@@ -5,30 +5,34 @@ const path = require('./config.path');
 
 module.exports = {
   mode: 'development',
-  entry: path.entryPageJs,
+  entry: {
+    [path.entryName]: path.entryPageJs,
+  },
   devServer: {
     static: {
       directory: path.src
     },
     compress: true,
     port: 2500,
-    hot: true,    
-    magicHtml: true,
+    hot: true,  
     open: {                 // open: true,
-      target: path.entryPageURL,
+      target: [path.entryPageName],
       app: {
-        name: 'Chrome',     // 'Google Chrome' on macOS, 'google-chrome' on Linux
+        name: 'Chrome',
       },
     },
   },  
   output: {
     path: path.outputPath,
-    filename: 'index.js',
+    filename: 'js/[name].bundle.js',
   },
   plugins: [
     new htmlWebpackPlugin({
+      template: 'src/pages/index.html',
       title: path.entryPageTitle,
-      template: path.entryPageHTML,
+      filename: '[name].html',
+      minify: false,
+      inject: 'body',
     })
   ],
   

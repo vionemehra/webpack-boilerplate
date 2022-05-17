@@ -5,14 +5,21 @@ const path = require('./config.path');
 
 module.exports = {
   mode: 'production',
-  entry: path.entryPageJs,
+  entry: {
+    [path.entryName]: path.entryPageJs,
+  },
   output: {
     path: path.outputPath,
-    filename: 'index.js'
+    filename: 'js/[name].bundle.js',
+    clean: true,    
   },
   plugins: [
     new htmlWebpackPlugin({
+      template: 'src/pages/index.html',
       title: path.entryPageTitle,
+      filename: '[name].html',
+      minify: false,
+      inject: 'body',
     })
   ],
 }
