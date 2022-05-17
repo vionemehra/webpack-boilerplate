@@ -1,0 +1,10 @@
+@use 'variables';
+@use 'foundations/code';
+@use 'foundations/lists';
+
+body {
+  color: variables.$body-color;
+}
+p {
+  color: variables.$color;
+}

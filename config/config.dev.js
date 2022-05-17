@@ -30,7 +30,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.s[ac]ss$/i,
         use: [
           // 'style-loader', // for injecting stylesheet to the page
           {            
@@ -39,10 +39,14 @@ module.exports = {
               publicPath: path.src,
             },
           },
+          'css-loader',
           {
-            loader: 'css-loader',
+            loader: 'sass-loader',
             options: {
-              // sourceMap: true, // for source-map
+              implementation: require.resolve('sass'),
+              sassOptions: {
+                fiber: false,
+              },
             },
           }
         ],

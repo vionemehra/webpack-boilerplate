@@ -18,19 +18,24 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
+        test: /\.s[ac]ss$/i,
         use: [
-          {
+          // 'style-loader', // for injecting stylesheet to the page
+          {            
             loader: MiniCssExtractPlugin.loader,
             options: {
               publicPath: path.src,
             },
           },
+          'css-loader',
           {
-            loader: 'css-loader',
+            loader: 'sass-loader',
             options: {
-              sourceMap: true,              
-            }
+              implementation: require.resolve('sass'),
+              sassOptions: {
+                fiber: false,
+              },
+            },
           }
         ],
       },
