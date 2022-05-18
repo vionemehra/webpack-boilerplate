@@ -1,9 +1,0 @@
-@use 'foundations/variables' as ae;
-@use 'foundations/code';
-
-
-p {
-  color: ae.$color;
-  display: flex;
-  flex-flow: row wrap;
-}

@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require('./config.path');
 
@@ -9,6 +8,7 @@ module.exports = {
   entry: {
     [path.entryName]: path.entryPageJs,
   },
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.src
@@ -29,27 +29,13 @@ module.exports = {
   },
   module: {
     rules: [
-      {
-        test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
-        use: [
-          // 'style-loader', // for injecting stylesheet to the page
-          {            
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.src,
-            },
-          },
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require.resolve('sass'),
-            },
-          }
-        ],
-      },
+     {
+       test: /\.js$/i,
+       exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
+     }
     ],
   },
   plugins: [
@@ -59,9 +45,6 @@ module.exports = {
       filename: '[name].html',
       minify: false,
       inject: 'body',
-    }),
-    new MiniCssExtractPlugin({
-      filename: "css/[name].css",
     }),
   ],
   
