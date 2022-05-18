@@ -8,6 +8,7 @@ module.exports = {
   entry: {
     [path.entryName]: path.entryPageJs,
   },
+  devtool: 'inline-source-map',
   devServer: {
     static: {
       directory: path.src
@@ -28,7 +29,13 @@ module.exports = {
   },
   module: {
     rules: [
-     
+     {
+       test: /\.js$/i,
+       exclude: /node_modules/,
+      use: {
+        loader: 'babel-loader'
+      }
+     }
     ],
   },
   plugins: [
