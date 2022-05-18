@@ -31,6 +31,7 @@ module.exports = {
     rules: [
       {
         test: /\.s[ac]ss$/i,
+        exclude: /node_modules/,
         use: [
           // 'style-loader', // for injecting stylesheet to the page
           {            
@@ -40,6 +41,7 @@ module.exports = {
             },
           },
           'css-loader',
+          'postcss-loader',
           {
             loader: 'sass-loader',
             options: {

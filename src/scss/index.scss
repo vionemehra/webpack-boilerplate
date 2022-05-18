@@ -4,4 +4,6 @@
 
 p {
   color: ae.$color;
+  display: flex;
+  flex-flow: row wrap;
 }
