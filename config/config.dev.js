@@ -17,7 +17,7 @@ module.exports = {
     compress: true,
     port: 2500,
     hot: true,  
-    open: {                 // open: true,
+    open: {
       target: [path.entryPageName],
       app: {
         name: 'Chrome',
@@ -26,27 +26,27 @@ module.exports = {
   },  
   output: {
     path: path.outputPath,
-    filename: 'js/[name].js',
+    filename: 'js/[name].js',   
+    assetModuleFilename: 'images/[name][ext]',
+    asyncChunks: true,
+    compareBeforeEmit: false,
   },
   module: {
     rules: [
-     {
-       test: /\.js$/i,
-       exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader'
+      {
+        test: /\.js$/i,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader'
+        },
       },
-     },
-     {
+      {
         test: /\.s[ac]ss$/i,
         exclude: /node_modules/,
         use: [
           // 'style-loader', // for injecting stylesheet to the page
           {            
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.src,
-            },
           },
           'css-loader',
           'postcss-loader',
@@ -58,6 +58,11 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',     
+      }
     ],
   },
   plugins: [

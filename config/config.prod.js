@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 
 const path = require('./config.path');
@@ -13,7 +14,10 @@ module.exports = {
   output: {
     path: path.outputPath,
     filename: 'js/[name].bundle.js',
-    clean: true,    
+    clean: true,
+    assetModuleFilename: 'images/[name][ext]',
+    asyncChunks: true,
+    compareBeforeEmit: false,
   },
   module: {
     rules: [
@@ -30,9 +34,6 @@ module.exports = {
           // 'style-loader', // for injecting stylesheet to the page
           {            
             loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.src,
-            },
           },
           'css-loader',
           'postcss-loader',
@@ -44,6 +45,11 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',     
+      }
     ],
   },
   plugins: [
@@ -58,4 +64,12 @@ module.exports = {
       filename: "css/[name].css",
     }),
   ],
+  optimization: {
+    minimize: true,
+    minimizer: [new TerserPlugin(
+      {
+        test: /\.js(\?.*)?$/i,
+      }
+    )],
+  },
 }

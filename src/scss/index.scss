@@ -1,7 +1,9 @@
 @use 'base/variables' as ae;
 @use 'base/code';
 
-
+body {
+  background-image: url('../images/bg.jpg');;
+}
 p {
   color: ae.$color;
   display: flex;
