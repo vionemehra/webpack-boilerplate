@@ -13,7 +13,7 @@ module.exports = {
   },
   output: {
     path: path.outputPath,
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].js',
     clean: true,
     assetModuleFilename: `assets/${path.entryName}/[name][ext]`,
     asyncChunks: true,
@@ -68,6 +68,14 @@ module.exports = {
     }),
   ],
   optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          filename: path.entryPageVendorJs,
+        },
+      },
+    },
     minimize: true,
     minimizer: [new TerserPlugin(
       {

@@ -82,5 +82,15 @@ module.exports = {
       filename: "css/[name].css",
     }),
   ],
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          filename: path.entryPageVendorJs,
+        },
+      },
+    },
+  }
   
 }
