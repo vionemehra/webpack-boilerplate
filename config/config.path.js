@@ -7,10 +7,9 @@ const PATHS = {
   entryPageName: `${name}.html`,
   src: path.resolve(__dirname, '../src'),
   entryPageTitle: 'Home Page  :: Welcome to Home page',
-  entryPageJs: path.resolve(__dirname, '../src/js/index.js'),
-  entryPageHTML: path.resolve(__dirname, '../src/pages/index.html'),
+  entryPageJs: path.resolve(__dirname, '../src/js/home.js'),
+  entryPageTemplate: `src/pages/${name}.html`,
   outputPath: path.resolve(__dirname, '../build'),
-  entryPageImages: '../images/',
 }
 
 module.exports = PATHS;

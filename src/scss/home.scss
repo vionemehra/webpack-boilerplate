@@ -1,0 +1,11 @@
+@use 'base/variables' as ae;
+@use 'base/code';
+
+body {
+  background-image: url('../assets/home/bg.jpg');;
+}
+p {
+  color: ae.$color;
+  display: flex;
+  flex-flow: row wrap;
+} 

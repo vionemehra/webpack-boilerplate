@@ -15,7 +15,7 @@ module.exports = {
     path: path.outputPath,
     filename: 'js/[name].bundle.js',
     clean: true,
-    assetModuleFilename: 'images/[name][ext]',
+    assetModuleFilename: `assets/${path.entryName}/[name][ext]`,
     asyncChunks: true,
     compareBeforeEmit: false,
   },
@@ -31,7 +31,6 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // 'style-loader', // for injecting stylesheet to the page
           {            
             loader: MiniCssExtractPlugin.loader,
           },
@@ -49,12 +48,16 @@ module.exports = {
         test: /\.(jpe?g|png|svg|gif)$/i,
         exclude: /node_modules/,
         type: 'asset/resource',     
-      }
+      },
+      {
+        test: /\.mp4$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: 'src/pages/index.html',
+      template: path.entryPageTemplate,
       title: path.entryPageTitle,
       filename: '[name].html',
       minify: false,

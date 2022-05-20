@@ -27,7 +27,7 @@ module.exports = {
   output: {
     path: path.outputPath,
     filename: 'js/[name].js',   
-    assetModuleFilename: 'images/[name][ext]',
+    assetModuleFilename: `assets/${path.entryName}/[name][ext]`,
     asyncChunks: true,
     compareBeforeEmit: false,
   },
@@ -62,12 +62,17 @@ module.exports = {
         test: /\.(jpe?g|png|svg|gif)$/i,
         exclude: /node_modules/,
         type: 'asset/resource',     
-      }
+      },
+      {
+        test: /\.mp4$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: 'src/pages/index.html',
+      template: path.entryPageTemplate,
       title: path.entryPageTitle,
       filename: '[name].html',
       minify: false,
