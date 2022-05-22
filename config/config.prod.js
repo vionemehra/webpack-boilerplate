@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 
 
 const path = require('./config.path');
@@ -8,7 +9,11 @@ const path = require('./config.path');
 module.exports = {
   mode: 'production',
   entry: {
-    [path.entryName]: path.entry.js,
+    commonTheme: path.entry.commonTheme,
+    [path.entryName]: {
+      dependOn: 'commonTheme',
+      import: path.entry.js,
+    }
   },
   output: {
     path: path.output.path,
@@ -47,6 +52,16 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.mp4$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
@@ -71,10 +86,11 @@ module.exports = {
       },
     },
     minimize: true,
-    minimizer: [new TerserPlugin(
-      {
+    minimizer: [
+      new TerserPlugin({
         test: /\.js(\?.*)?$/i,
-      }
-    )],
+        extractComments: false,
+      })
+    ],
   },
 }

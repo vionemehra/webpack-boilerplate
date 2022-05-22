@@ -7,7 +7,11 @@ const path = require('./config.path');
 module.exports = {
   mode: 'development',
   entry: {
-    [path.entryName]: path.entry.js,
+    commonTheme: path.entry.commonTheme,
+    [path.entryName]: {
+      dependOn: 'commonTheme',
+      import: path.entry.js,
+    }
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -18,15 +22,18 @@ module.exports = {
     port: 2500,
     hot: true,  
     open: {                 // open: true,
-      target: [path.entryPageName],
+      target: [path.entry.html],
       app: {
         name: 'Chrome',
       },
     },
   },  
   output: {
-    path: path.outputPath,
-    filename: 'js/[name].js',
+    path: path.output.path,
+    filename: path.output.js,  
+    assetModuleFilename: path.output.assets,
+    asyncChunks: true,
+    compareBeforeEmit: false,
   },
   module: {
     rules: [
@@ -58,13 +65,23 @@ module.exports = {
           }
         ],
       },
+      {
+        test: /\.(jpe?g|png|svg|gif)$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
+      {
+        test: /\.mp4$/i,
+        exclude: /node_modules/,
+        type: 'asset/resource',
+      },
     ],
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: 'src/pages/index.html',
-      title: path.entryPageTitle,
-      filename: '[name].html',
+      template: path.entry.template,
+      title: path.entry.title,
+      filename: path.output.html,
       minify: false,
       inject: 'body',
     }),
