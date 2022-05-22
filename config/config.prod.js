@@ -62,6 +62,10 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
       },
+      {
+        test: /\.ejs$/i,
+        use: ['html-loader', 'template-ejs-loader'],
+      },  
     ],
   },
   plugins: [

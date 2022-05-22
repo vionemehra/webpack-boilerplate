@@ -6,7 +6,7 @@ const PATHS = {
   src: path.resolve(__dirname, '../src'),
   entry: {
     html: `${name}.html`,
-    template: `src/pages/${name}.html`,
+    template: `src/pages/${name}.ejs`,
     js: path.resolve(__dirname, `../src/js/${name}.js`),
     title: `${name} :: Welcome to SquareYards`,
     commonTheme: path.resolve(__dirname, `../src/js/commonTheme.js`),

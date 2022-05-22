@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 const path = require('./config.path');
 
@@ -75,6 +76,10 @@ module.exports = {
         exclude: /node_modules/,
         type: 'asset/resource',
       },
+      {
+        test: /\.ejs$/i,
+        use: ['html-loader', 'template-ejs-loader'],
+      },  
     ],
   },
   plugins: [
