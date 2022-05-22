@@ -21,7 +21,11 @@ module.exports = {
     compress: true,
     port: 2500,
     hot: true,  
+<<<<<<< Updated upstream
     open: {                 // open: true,
+=======
+    open: {
+>>>>>>> Stashed changes
       target: [path.entry.html],
       app: {
         name: 'Chrome',
@@ -89,5 +93,18 @@ module.exports = {
       filename: path.output.css,
     }),
   ],
+<<<<<<< Updated upstream
+=======
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          filename: path.output.vendnorJs,
+        },
+      },
+    },
+  }
+>>>>>>> Stashed changes
   
 }
