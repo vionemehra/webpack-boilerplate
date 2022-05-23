@@ -1,19 +1,10 @@
-const webpack = require('webpack');
-const htmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-
+const { merge } = require('webpack-merge');
+const common = require('./config.common.js');
 const path = require('./config.path');
 
-module.exports = {
-  mode: 'development',
-  entry: {
-    commonTheme: path.entry.commonTheme,
-    [path.entryName]: {
-      dependOn: 'commonTheme',
-      import: path.entry.js,
-    }
-  },
+
+module.exports = merge(common, {
+  mode: 'development', 
   devtool: 'inline-source-map',
   devServer: {
     static: {
@@ -22,11 +13,7 @@ module.exports = {
     compress: true,
     port: 2500,
     hot: true,  
-<<<<<<< Updated upstream
-    open: {                 // open: true,
-=======
     open: {
->>>>>>> Stashed changes
       target: [path.entry.html],
       app: {
         name: 'Chrome',
@@ -40,66 +27,6 @@ module.exports = {
     asyncChunks: true,
     compareBeforeEmit: false,
   },
-  module: {
-    rules: [
-     {
-       test: /\.js$/i,
-       exclude: /node_modules/,
-      use: {
-        loader: 'babel-loader'
-      },
-     },
-     {
-        test: /\.s[ac]ss$/i,
-        exclude: /node_modules/,
-        use: [
-          // 'style-loader', // for injecting stylesheet to the page
-          {            
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: path.src,
-            },
-          },
-          'css-loader',
-          'postcss-loader',
-          {
-            loader: 'sass-loader',
-            options: {
-              implementation: require.resolve('sass'),
-            },
-          }
-        ],
-      },
-      {
-        test: /\.(jpe?g|png|svg|gif)$/i,
-        exclude: /node_modules/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.mp4$/i,
-        exclude: /node_modules/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.ejs$/i,
-        use: ['html-loader', 'template-ejs-loader'],
-      },  
-    ],
-  },
-  plugins: [
-    new htmlWebpackPlugin({
-      template: path.entry.template,
-      title: path.entry.title,
-      filename: path.output.html,
-      minify: false,
-      inject: 'body',
-    }),
-    new MiniCssExtractPlugin({
-      filename: path.output.css,
-    }),
-  ],
-<<<<<<< Updated upstream
-=======
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -110,6 +37,4 @@ module.exports = {
       },
     },
   }
->>>>>>> Stashed changes
-  
-}
+});
