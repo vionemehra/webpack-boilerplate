@@ -1,9 +1,0 @@
-@use 'base/variables' as ae;
-@use 'base/code';
-
-
-p {
-  color: ae.$color;
-  display: flex;
-  flex-flow: row wrap;
-} 

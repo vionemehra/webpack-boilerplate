@@ -51,7 +51,12 @@ module.exports = {
           {
             loader: "html-loader",
             options: {
-              minimize: false
+              minimize: false,
+              sources: false,
+              minimize: {
+                removeComments: true,
+                collapseWhitespace: false,
+              },
             }
           },
           'template-ejs-loader'
