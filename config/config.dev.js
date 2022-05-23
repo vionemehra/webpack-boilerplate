@@ -6,6 +6,13 @@ const path = require('./config.path');
 module.exports = merge(common, {
   mode: 'development', 
   devtool: 'inline-source-map',
+  entry: {
+    commonTheme: path.entry.commonTheme,
+    [path.entryName]: {
+      dependOn: 'commonTheme',
+      import: path.entry.js,
+    }
+  },
   devServer: {
     static: {
       directory: path.src

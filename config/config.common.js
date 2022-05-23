@@ -4,13 +4,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('./config.path');
 
 module.exports = {
-  entry: {
-    commonTheme: path.entry.commonTheme,
-    [path.entryName]: {
-      dependOn: 'commonTheme',
-      import: path.entry.js,
-    }
-  },
+  
   module: {
     rules: [
      {
