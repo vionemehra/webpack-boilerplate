@@ -7,14 +7,17 @@ const path = require('./config.path');
 module.exports = merge(common, {
   mode: 'production',
   entry: {
-    [path.entryName]: {
-      import: path.entry.js,
+    [path.entryName.web]: {
+      import: path.entry.js.web,
+    },
+    [path.entryName.mobile]: {
+      import: path.entry.js.mobile,
     }
   },
-  output: {
+  output: {    
     path: path.output.path,
-    filename: path.output.js,
-    clean: true,
+    filename: path.output.js,  
+    clean: true,    
     assetModuleFilename: path.output.assets,
     asyncChunks: true,
     compareBeforeEmit: false,
@@ -28,7 +31,6 @@ module.exports = merge(common, {
         },
       },
     },
-    minimize: true,
     minimizer: [
       new TerserPlugin({
         test: /\.js(\?.*)?$/i,

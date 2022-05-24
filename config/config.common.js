@@ -3,8 +3,7 @@ const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const path = require('./config.path');
 
-module.exports = {
-  
+module.exports = {  
   module: {
     rules: [
      {
@@ -48,18 +47,7 @@ module.exports = {
       {
         test: /\.ejs$/i,
         use: [
-          {
-            loader: "html-loader",
-            options: {
-              minimize: false,
-              sources: false,
-              minimize: {
-                removeComments: true,
-                collapseWhitespace: false,
-              },
-            }
-          },
-          'template-ejs-loader'
+          { loader: 'ejs-easy-loader' }
         ],
       },  
     ],
@@ -67,9 +55,16 @@ module.exports = {
   
   plugins: [
     new htmlWebpackPlugin({
-      template: path.entry.template,
+      template: path.entry.template.web,
       title: path.entry.title,
-      filename: path.output.html,
+      filename: path.output.html.web,
+      minify: false,
+      inject: 'body',
+    }),
+    new htmlWebpackPlugin({
+      template: path.entry.template.mobile,
+      title: path.entry.title,
+      filename: path.output.html.mobile,
       minify: false,
       inject: 'body',
     }),

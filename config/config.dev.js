@@ -8,9 +8,13 @@ module.exports = merge(common, {
   devtool: 'inline-source-map',
   entry: {
     commonTheme: path.entry.commonTheme,
-    [path.entryName]: {
+    [path.entryName.web]: {
       dependOn: 'commonTheme',
-      import: path.entry.js,
+      import: path.entry.js.web,
+    },
+    [path.entryName.mobile]: {
+      dependOn: 'commonTheme',
+      import: path.entry.js.mobile,
     }
   },
   devServer: {
@@ -21,7 +25,7 @@ module.exports = merge(common, {
     port: 2500,
     hot: true,  
     open: {
-      target: [path.entry.html],
+      target: [path.entry.html.web],
       app: {
         name: 'Chrome',
       },
@@ -37,11 +41,6 @@ module.exports = merge(common, {
   optimization: {
     splitChunks: {
       chunks: 'all',
-      cacheGroups: {
-        defaultVendors: {
-          filename: path.output.vendnorJs,
-        },
-      },
     },
   }
 });

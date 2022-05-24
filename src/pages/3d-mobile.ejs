@@ -1,4 +1,4 @@
-<%- include('themeCommon/header.ejs') %>
+<%- require('./themeCommon/header.ejs')({title: htmlWebpackPlugin.options.title}) %>
 
 <div class="mapSearch">
   <div class="overlayImg">
@@ -28,3 +28,5 @@
     </div>
   </div>
 </div>
+
+<%-  require('./themeCommon/footer.ejs')() %>
