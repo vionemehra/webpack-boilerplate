@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const htmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 const path = require('./config.path');
 
 module.exports = {  
@@ -35,16 +36,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|svg|gif)$/i,
-        exclude: /node_modules/,
-        type: 'asset/resource',
-      },
-      {
-        test: /\.mp4$/i,
-        exclude: /node_modules/,
-        type: 'asset/resource',
-      },
-      {
         test: /\.ejs$/i,
         use: [
           { loader: 'ejs-easy-loader' }
@@ -56,20 +47,31 @@ module.exports = {
   plugins: [
     new htmlWebpackPlugin({
       template: path.entry.template.web,
-      title: path.entry.title,
+      title: 'vivek',
       filename: path.output.html.web,
       minify: false,
       inject: 'body',
+      chunks: [`${path.entryName.web}`]
     }),
     new htmlWebpackPlugin({
       template: path.entry.template.mobile,
-      title: path.entry.title,
+      title: 'asd',
       filename: path.output.html.mobile,
       minify: false,
       inject: 'body',
+      chunks: [`${path.entryName.mobile}`]
     }),
     new MiniCssExtractPlugin({
       filename: path.output.css,
+    }),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: "assets/3d/*",
+          to: "assets/3d/",
+          context: "src/",
+        },
+      ],
     }),
   ],
 };

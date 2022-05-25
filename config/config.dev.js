@@ -7,15 +7,10 @@ module.exports = merge(common, {
   mode: 'development', 
   devtool: 'inline-source-map',
   entry: {
-    commonTheme: path.entry.commonTheme,
-    [path.entryName.web]: {
-      dependOn: 'commonTheme',
-      import: path.entry.js.web,
-    },
-    [path.entryName.mobile]: {
-      dependOn: 'commonTheme',
-      import: path.entry.js.mobile,
-    }
+    // [path.entryName.web]:  [`${path.entry.js.web}`, `${path.entry.scss.web}`],
+    // [path.entryName.mobile]:  [`${path.entry.js.mobile}`, `${path.entry.scss.mobile}`],
+    [path.entryName.web]:  [`${path.entry.js.web}`],
+    [path.entryName.mobile]:  [`${path.entry.js.mobile}`],
   },
   devServer: {
     static: {
@@ -25,7 +20,7 @@ module.exports = merge(common, {
     port: 2500,
     hot: true,  
     open: {
-      target: [path.entry.html.web],
+      target: [`${path.entry.html.web}`, `${path.entry.html.mobile}`],
       app: {
         name: 'Chrome',
       },
@@ -34,13 +29,16 @@ module.exports = merge(common, {
   output: {
     path: path.output.path,
     filename: path.output.js,  
-    assetModuleFilename: path.output.assets,
-    asyncChunks: true,
-    compareBeforeEmit: false,
   },
+  
   optimization: {
     splitChunks: {
       chunks: 'all',
+      cacheGroups: {
+        defaultVendors: {
+          filename: path.output.vendnorJs,
+        },
+      },
     },
-  }
+  },
 });
